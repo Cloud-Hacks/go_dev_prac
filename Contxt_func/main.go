@@ -38,7 +38,11 @@ func fetchDataAny(ctx context.Context, Uid int) (int, error) {
 		case <-ctx.Done():
 			return 0, fmt.Errorf("error fetching from 3rd party")
 		case res := <-resp:
+			// fmt.Println(resp)
 			return res.v, res.er
+		case <-resp:
+			// fmt.Println(resp, <-resp)
+			return 0, nil
 		}
 	}
 
