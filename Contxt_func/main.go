@@ -14,6 +14,9 @@ type Res struct {
 
 // context allows you to maintain the consistency among the fetch requests to third party
 func fetchThirdPartyDataAnything() (int, error) {
+	ctx := context.TODO()
+	t := ctx.Value(5)
+	fmt.Println(t)
 	time.Sleep(5 * time.Millisecond)
 
 	return 777, nil
@@ -42,7 +45,7 @@ func fetchDataAny(ctx context.Context, Uid int) (int, error) {
 			return res.v, res.er
 		case <-resp:
 			// fmt.Println(resp, <-resp)
-			return 0, nil
+			return Uid, nil
 		}
 	}
 
