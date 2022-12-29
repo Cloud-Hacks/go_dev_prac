@@ -14,10 +14,10 @@ type Res struct {
 
 // context allows you to maintain the consistency among the fetch requests to third party
 func fetchThirdPartyDataAnything() (int, error) {
-	ctx := context.TODO()
-	t := ctx.Value(5)
+	ctx := context.WithValue(context.Background(), "todo", 5)
+	t := ctx.Value("todo")
 	fmt.Println(t)
-	time.Sleep(5 * time.Millisecond)
+	time.Sleep(50 * time.Millisecond)
 
 	return 777, nil
 }
@@ -61,5 +61,17 @@ func main() {
 	}
 
 	fmt.Printf("res %d \n", val)
+
+	go func() {
+		select {
+		case <-ctx.Done():
+			fmt.Println("time exceeded")
+		default:
+			fmt.Println("channel created")
+		}
+	}()
+
+	time.Sleep(2 * time.Second)
+
 	fmt.Println(time.Since(strt))
 }
