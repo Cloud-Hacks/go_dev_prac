@@ -1,13 +1,18 @@
 package main
 
-import "fmt"
+import (
+	"context"
+	"fmt"
+
+	"github.com/Cloud-Hacks/go_dev_prac/json_api/service"
+)
 
 func main() {
-	var str string
-	str = "Yogurt is a variant of milk"
+	ctx := context.Background()
+	s := service.GetUrl("http://catfact.ninja/fact")
 
-	// OP: 89 111 103 117 ...
-	for _, i := range str {
-		fmt.Println(i)
-	}
+	f, _ := s.GetFactSvc(ctx)
+
+	fmt.Println(f)
+
 }

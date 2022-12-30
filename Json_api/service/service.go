@@ -1,4 +1,4 @@
-package main
+package service
 
 import (
 	"context"
@@ -10,7 +10,9 @@ type Service interface {
 	GetFactSvc(context.Context) (*myFact, error)
 }
 
-type myFact struct{}
+type myFact struct {
+	fact string `json`
+}
 
 type factSvc struct {
 	url string
