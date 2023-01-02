@@ -3,6 +3,7 @@ package service
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
@@ -27,6 +28,7 @@ func GetUrl(url string) Service {
 func (s *factSvc) GetFactSvc(context.Context) (*myFact, error) {
 	resp, err := http.Get("http://catfact.ninja/fact")
 	resp.Body.Close()
+	fmt.Println(resp.Body)
 
 	if err != nil {
 		return nil, err
@@ -34,9 +36,10 @@ func (s *factSvc) GetFactSvc(context.Context) (*myFact, error) {
 
 	f := &myFact{}
 
-	if err := json.NewDecoder(resp.Body).Decode(f); err != nil {
+	if err = json.NewDecoder(resp.Body).Decode(f); err != nil {
 		return nil, err
 	}
+	fmt.Println(f)
 
 	return f, nil
 }
