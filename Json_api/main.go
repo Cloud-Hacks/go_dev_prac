@@ -13,6 +13,6 @@ func main() {
 
 	f, _ := s.GetFactSvc(ctx)
 
-	fmt.Println(f)
+	fmt.Println(*f)
 
 }
