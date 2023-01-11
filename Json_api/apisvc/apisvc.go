@@ -9,7 +9,7 @@ import (
 )
 
 type Apisvr struct {
-	svc service.Service
+	svc service.factSvc
 }
 
 func NewApiReq(svc service.Service) Apisvr {
