@@ -13,8 +13,8 @@ type statStack interface {
 type ropt struct{}
 
 type stat struct {
-	curr string `json`
-	stat int32  `json`
+	curr string `json: "cur"`
+	stat int32  `json: "stat`
 }
 
 func addStat() stat {
