@@ -6,25 +6,25 @@ import (
 	"net/http"
 )
 
-type Service interface {
-	GetFactSvc(context.Context) (*myFact, error)
-}
+// type Service interface {
+// 	GetFactSvc(context.Context) (*myFact, error)
+// }
 
 type myFact struct {
 	Fact string `json:"fact"`
 }
 
-type factSvc struct {
+type FactSvc struct {
 	url string
 }
 
-func GetUrl(url string) Service {
-	return &factSvc{
+func GetUrl(url string) FactSvc {
+	return FactSvc{
 		url: url,
 	}
 }
 
-func (s *factSvc) GetFactSvc(context.Context) (*myFact, error) {
+func (s *FactSvc) GetFactSvc(context.Context) (*myFact, error) {
 	resp, err := http.Get("http://catfact.ninja/fact")
 	if err != nil {
 		return nil, err

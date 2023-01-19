@@ -9,10 +9,10 @@ import (
 )
 
 type Apisvr struct {
-	svc service.factSvc
+	svc service.FactSvc
 }
 
-func NewApiReq(svc service.Service) Apisvr {
+func NewApiReq(svc service.FactSvc) Apisvr {
 	return Apisvr{
 		svc: svc,
 	}
