@@ -10,7 +10,7 @@ import (
 type Storage interface {
 	CreateAccount(*Account) error
 	DeleteAccount(int) error
-	UpdateAccount(*Account) error
+	UpdateAccount(int, int) error
 	GetAccounts() ([]*Account, error)
 	GetAccountByID(int) (*Account, error)
 	GetAccountByNumber(int) (*Account, error)
@@ -70,14 +70,14 @@ func (s *PostgresStore) CreateAccount(acc *Account) error {
 		acc.CreatedAt)
 
 	if err != nil {
+		fmt.Println("err")
 		return err
 	}
 
 	return nil
 }
 
-func (s *PostgresStore) UpdateAccount(*Account) error {
-	var id, Bal int
+func (s *PostgresStore) UpdateAccount(id int, Bal int) error {
 	_, err := s.db.Query("update account if exists account set Balance = $1 where id = $2", Bal, id)
 	return err
 }
