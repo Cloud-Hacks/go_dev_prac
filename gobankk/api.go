@@ -109,7 +109,7 @@ func (s *APIServer) handleGetAccountByID(w http.ResponseWriter, r *http.Request)
 		return s.handleDeleteAccount(w, r)
 	}
 
-	if r.Method == "UPDATE" {
+	if r.Method == "PUT" {
 		return s.handleUpdateAccount(w, r)
 	}
 
