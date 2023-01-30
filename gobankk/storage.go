@@ -78,7 +78,7 @@ func (s *PostgresStore) CreateAccount(acc *Account) error {
 }
 
 func (s *PostgresStore) UpdateAccount(id int, Bal int) error {
-	_, err := s.db.Query("update account if exists account set Balance = $1 where id = $2", Bal, id)
+	_, err := s.db.Query("update account set Balance = $1 where id = $2", Bal, id)
 	return err
 }
 

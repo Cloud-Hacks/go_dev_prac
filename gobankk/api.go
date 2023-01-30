@@ -153,7 +153,7 @@ func (s *APIServer) handleUpdateAccount(w http.ResponseWriter, r *http.Request) 
 		return err
 	}
 
-	if err := s.store.UpdateAccount(id, 5000); err != nil {
+	if err := s.store.UpdateAccount(id, 50000); err != nil {
 		return err
 	}
 
