@@ -26,6 +26,7 @@ type CreateAccountRequest struct {
 	FirstName string `json:"firstName"`
 	LastName  string `json:"lastName"`
 	Password  string `json:"password"`
+	Balance   int64  `json:"balance"`
 }
 
 type Account struct {
@@ -42,7 +43,7 @@ func (a *Account) ValidPassword(pw string) bool {
 	return bcrypt.CompareHashAndPassword([]byte(a.EncryptedPassword), []byte(pw)) == nil
 }
 
-func NewAccount(firstName, lastName, password string) (*Account, error) {
+func NewAccount(firstName, lastName, password string, balance int64) (*Account, error) {
 	encpw, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 	if err != nil {
 		return nil, err
@@ -52,6 +53,7 @@ func NewAccount(firstName, lastName, password string) (*Account, error) {
 		FirstName:         firstName,
 		LastName:          lastName,
 		EncryptedPassword: string(encpw),
+		Balance:           balance,
 		Number:            int64(rand.Intn(1000000)),
 		CreatedAt:         time.Now().UTC(),
 	}, nil

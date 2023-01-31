@@ -122,7 +122,7 @@ func (s *APIServer) handleCreateAccount(w http.ResponseWriter, r *http.Request) 
 		return err
 	}
 
-	account, err := NewAccount(req.FirstName, req.LastName, req.Password)
+	account, err := NewAccount(req.FirstName, req.LastName, req.Password, req.Balance)
 	if err != nil {
 		return err
 	}
