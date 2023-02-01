@@ -1,4 +1,4 @@
-module github.com/anthdm/gobank
+module github.com/Cloud-Hacks/go_dev_prac/gobankk
 
 go 1.18
 
