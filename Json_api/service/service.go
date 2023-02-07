@@ -24,7 +24,7 @@ func GetUrl(url string) Service {
 	}
 }
 
-func (s *factSvc) GetFactSvc(context.Context) (*myFact, error) {
+func (s *factSvc) GetFactSvc(ctx context.Context) (*myFact, error) {
 	resp, err := http.Get("http://catfact.ninja/fact")
 	if err != nil {
 		return nil, err
