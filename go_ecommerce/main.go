@@ -8,7 +8,7 @@ import (
 	"github.com/Cloud-Hacks/go_dev_prac/go_commerce/api"
 	"github.com/Cloud-Hacks/go_dev_prac/go_commerce/store"
 
-	"github.com/weavebox/weavebox"
+	"github.com/anthdm/weavebox"
 
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
