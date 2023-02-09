@@ -3,7 +3,7 @@ package store
 import (
 	"context"
 
-	"github.com/anthdm/ggcommerce/types"
+	"github.com/Cloud-Hacks/go_dev_prac/go_commerce/types"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"

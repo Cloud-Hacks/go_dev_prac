@@ -36,6 +36,7 @@ func (mw *AdminAuthMiddleware) Authenticate(ctx *weavebox.Context) error {
 		return ErrUnAuthenticated
 	}
 	token, err := parseJWT(tokenString)
+	os.Setenv("JWT_SECRET", "mysecret")
 	if err != nil {
 		return ErrUnAuthenticated
 	}

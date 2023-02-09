@@ -3,7 +3,6 @@ module github.com/Cloud-Hacks/go_dev_prac/go_commerce
 go 1.18
 
 require (
-	github.com/anthdm/ggcommerce v0.0.0-20230104175916-675c0f3d3e3b
 	github.com/anthdm/weavebox v0.9.7
 	github.com/golang-jwt/jwt/v4 v4.4.3
 	github.com/stretchr/testify v1.8.1

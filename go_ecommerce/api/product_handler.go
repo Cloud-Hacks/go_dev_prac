@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/anthdm/ggcommerce/store"
-	"github.com/anthdm/ggcommerce/types"
+	"github.com/Cloud-Hacks/go_dev_prac/go_commerce/store"
+	"github.com/Cloud-Hacks/go_dev_prac/go_commerce/types"
 
 	"github.com/anthdm/weavebox"
 )

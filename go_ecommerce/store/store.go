@@ -3,7 +3,7 @@ package store
 import (
 	"context"
 
-	"github.com/anthdm/ggcommerce/types"
+	"github.com/Cloud-Hacks/go_dev_prac/go_commerce/types"
 )
 
 type ProductStorer interface {

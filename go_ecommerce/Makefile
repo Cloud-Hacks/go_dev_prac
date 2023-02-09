@@ -1,8 +1,8 @@
 build:
-	@go build -o bin/ggcommerce
+	@go build -o bin/go_ecommerce
 
 run: build
-	@./bin/ggcommerce
+	@./bin/go_ecommerce
 
 test:
 	@go test -v ./...
