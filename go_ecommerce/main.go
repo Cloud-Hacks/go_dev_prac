@@ -24,7 +24,9 @@ func main() {
 	app.ErrorHandler = handleAPIError
 
 	adminMW := &api.AdminAuthMiddleware{}
+	adminW := &api.AuthenticationHandler{}
 	adminRoute := app.Box("/admin")
+	adminRoute.Post("/", adminW.AuthenticateUser)
 	adminRoute.Use(adminMW.Authenticate)
 
 	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI("mongodb://localhost:27017"))
