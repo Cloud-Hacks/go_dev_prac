@@ -27,7 +27,6 @@ func main() {
 	adminW := &api.AuthenticationHandler{}
 	adminRoute := app.Box("/admin")
 	adminRoute.Post("/", adminW.AuthenticateUser)
-	adminRoute.Use(adminMW.Authenticate)
 
 	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI("mongodb://localhost:27017"))
 	if err != nil {
@@ -38,6 +37,7 @@ func main() {
 
 	// admin/product
 	adminProductRoute := adminRoute.Box("/product")
+	adminProductRoute.Use(adminMW.Authenticate)
 	adminProductRoute.Get("/:id", productHandler.HandleGetProductByID)
 	adminProductRoute.Get("/", productHandler.HandleGetProducts)
 	adminProductRoute.Post("/", productHandler.HandlePostProduct)
