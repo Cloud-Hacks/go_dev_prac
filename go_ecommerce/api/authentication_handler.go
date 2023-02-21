@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/anthdm/weavebox"
+	"github.com/golang-jwt/jwt/v4"
 )
 
 type AuthenticationRequest struct {
@@ -30,10 +31,10 @@ func (h *AuthenticationHandler) AuthenticateUser(ctx *weavebox.Context) (error, 
 	return nil, token
 }
 
-func createJWT(account *Account) (string, error) {
+func createJWT(pw string) (string, error) {
 	claims := &jwt.MapClaims{
-		"expiresAt":     15000,
-		"accountNumber": account.Number,
+		"expiresAt": 15000,
+		"password":  pw,
 	}
 
 	secret := os.Getenv("JWT_SECRET")
