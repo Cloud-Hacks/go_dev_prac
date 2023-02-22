@@ -2,10 +2,11 @@ package api
 
 import (
 	"encoding/json"
+	"log"
 	"os"
 
 	"github.com/anthdm/weavebox"
-	"github.com/golang-jwt/jwt/v4"
+	jwt "github.com/golang-jwt/jwt/v4"
 )
 
 type AuthenticationRequest struct {
@@ -17,18 +18,20 @@ type AuthenticationHandler struct {
 	// userStore
 }
 
-func (h *AuthenticationHandler) AuthenticateUser(ctx *weavebox.Context) (error, string) {
+func (h *AuthenticationHandler) AuthenticateUser(ctx *weavebox.Context) error {
 	authReq := &AuthenticationRequest{}
 	if err := json.NewDecoder(ctx.Request().Body).Decode(authReq); err != nil {
-		return err, ""
+		return err
 	}
 
+	os.Setenv("JWT_SECRET", "mysecret")
 	token, err := createJWT(authReq.Password)
 	if err != nil {
-		return err, ""
+		return err
 	}
+	log.Println(token)
 
-	return nil, token
+	return nil
 }
 
 func createJWT(pw string) (string, error) {

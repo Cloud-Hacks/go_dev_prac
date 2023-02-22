@@ -6,7 +6,7 @@ import (
 	"os"
 
 	"github.com/anthdm/weavebox"
-	"github.com/golang-jwt/jwt/v4"
+	jwt "github.com/golang-jwt/jwt/v4"
 )
 
 var ErrUnAuthenticated = errors.New("unAuthenticated")
@@ -35,16 +35,20 @@ func (mw *AdminAuthMiddleware) Authenticate(ctx *weavebox.Context) error {
 	if len(tokenString) == 0 {
 		return ErrUnAuthenticated
 	}
-	token, err := parseJWT(tokenString)
 	os.Setenv("JWT_SECRET", "mysecret")
+	token, err := parseJWT(tokenString)
+
 	if err != nil {
+		fmt.Println(err)
 		return ErrUnAuthenticated
 	}
 	if !token.Valid {
+		fmt.Println("err2")
 		return ErrUnAuthenticated
 	}
 	claims, ok := token.Claims.(jwt.MapClaims)
 	if !ok {
+		fmt.Println("err3")
 		return ErrUnAuthenticated
 	}
 
@@ -61,6 +65,6 @@ func parseJWT(tokenString string) (*jwt.Token, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
 		}
-		return secret, nil
+		return []byte(secret), nil
 	})
 }
