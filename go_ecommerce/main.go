@@ -28,7 +28,7 @@ func main() {
 	adminRoute := app.Box("/admin")
 	adminRoute.Post("/", adminW.AuthenticateUser)
 
-	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI("mongodb://localhost:27017"))
+	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI("mongodb://memp:Hijacknow%4012@G0DF66ACB27C3BC-L93DGI0OCNLPZ4ON.adb.ap-mumbai-1.oraclecloudapps.com:27017"))
 	if err != nil {
 		panic(err)
 	}
