@@ -19,6 +19,9 @@ func LineCount(fileName string) (int, error) {
 	var r io.Reader = file
 	// io.ReadAll(r)
 
+	// x,err :=io.Writer.Write(file)
+	// io.WriteString()
+
 	var lc LineCounter
 
 	if strings.HasSuffix(fileName, ".gz") {
