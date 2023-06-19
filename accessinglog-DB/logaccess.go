@@ -16,7 +16,12 @@ type MenuItemCount struct {
 // ItemsK represents a key-value pair
 type ItemsK struct {
 	Key   string
-	Value int
+	Count int
+}
+
+type menuItem struct {
+	EaterID string
+	FoodID  string
 }
 
 // var menuItemsID = make(map[string]string, 10)
@@ -49,7 +54,7 @@ func main() {
 
 	// Map to store the count of each menu item
 	menuItemCounts := make(map[string]int)
-	menuItems := make(map[string]string)
+	menuItems := []menuItem{}
 
 	// Iterate over each row in the log
 	for rows.Next() {
@@ -60,21 +65,28 @@ func main() {
 			continue
 		}
 
-		menuItems[eaterID] = foodmenuID
+		// menuItems[eaterID] = foodmenuID
 		// fmt.Println(eaterID, foodmenuID)
-
-		// Check for duplicate eater_id-foodmenu_id combination
-		/* if menuItemCounts[fmt.Sprintf("%s", foodmenuID)] > 0 {
-			log.Printf("Error: Duplicate entry for eater_id %s and foodmenu_id %s\n", eaterID, foodmenuID)
-			continue
-		} */
 
 		// Increment the count for the menu item
 		menuItemCounts[foodmenuID]++
-	}
 
+		menuItems = append(menuItems, menuItem{eaterID, foodmenuID})
+
+	}
 	if err := rows.Err(); err != nil {
 		log.Fatal("Error occurred while iterating over log rows:", err)
+	}
+
+	// Check for duplicate eater_id-foodmenu_id combination
+	for i := 0; i < len(menuItems); i++ {
+		for j := i + 1; j < len(menuItems); j++ {
+			if menuItems[i].EaterID == menuItems[j].EaterID {
+				if menuItems[i].FoodID == menuItems[j].FoodID {
+					log.Fatalf("Error: Duplicate entry for eater_id %s and foodmenu_id %s\n", menuItems[i].EaterID, menuItems[i].FoodID)
+				}
+			}
+		}
 	}
 
 	// Get the top 3 menu items consumed
@@ -196,20 +208,24 @@ func getTopNMenuItems(menuItemCounts map[string]int, N int) []string {
 
 	t := 0
 	itemTemp := []ItemsK{}
-	for key, value := range menuItemCounts {
-		itemTemp = append(itemTemp, ItemsK{key, value})
+	for key, count := range menuItemCounts {
+		itemTemp = append(itemTemp, ItemsK{key, count})
 	}
 
-	for i := 0; i < len(itemTemp); i++ {
+	for i := 0; i < len(itemTemp)-1; i++ {
 		t = i
 		for j := i + 1; j < len(itemTemp); j++ {
-			if itemTemp[i].Value < itemTemp[j].Value {
+			if itemTemp[t].Count < itemTemp[j].Count {
 				// j = i
 				t = j
+				// i = j
 			}
 		}
+		// fmt.Println(i, t)
 		itemTemp[i], itemTemp[t] = itemTemp[t], itemTemp[i]
 	}
+
+	// fmt.Println(itemTemp)
 
 	// Get the top N menu items
 	topNMenuItems := make([]string, N)
@@ -222,5 +238,6 @@ func getTopNMenuItems(menuItemCounts map[string]int, N int) []string {
 		topNMenuItems = append(topNMenuItems, menuItems[i].MenuItem)
 	} */
 
+	// fmt.Println(topNMenuItems)
 	return topNMenuItems
 }

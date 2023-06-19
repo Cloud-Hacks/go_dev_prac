@@ -1,0 +1,10 @@
+eater_id, foodmenu_id
+12TY, 67
+24TO, 45
+89ER, 34
+78YI, 56
+89ER, 56
+89ER, 45
+23ER, 34
+26ER, 34
+26ER, 67
