@@ -61,7 +61,7 @@ func main() {
 		log.Fatal("Error occurred while scanning log file:", err)
 	}
 
-	fmt.Println(menuItems)
+	// fmt.Println(menuItems)
 
 	// Check for duplicate eater_id-foodmenu_id combination
 	for i := 0; i < len(menuItems); i++ {

@@ -1,4 +1,4 @@
-package logfileacc_test
+package main
 
 import (
 	"reflect"
